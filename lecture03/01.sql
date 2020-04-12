@@ -6,6 +6,8 @@ CREATE TABLE news (
 	user_id BIGINT UNSIGNED NOT NULL,
 	media_id BIGINT UNSIGNED NOT NULL,
 	content text,
+	created_at datetime default now(),
+	updated_at datetime on update now(),
 	
 	FOREIGN KEY (user_id) REFERENCES users(id),
 	FOREIGN KEY (media_id) references media(id)
@@ -17,8 +19,9 @@ drop table if exists items;
 create table items(
 	id serial primary key,
 	content text,
-
-	FOREIGN KEY (user_id) REFERENCES users(id)
+	created_at datetime default now(),
+	updated_at datetime on update now()
+-- 	FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 -- таблица users_items - связь М х М элементов каталога и пользователей.
